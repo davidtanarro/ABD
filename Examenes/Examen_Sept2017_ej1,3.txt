@@ -1,0 +1,44 @@
+David Tanarro De Las Heras - 3º C
+
+Ejercicio 1) Datalog
+	a) info1(Nom, Bien) :- clientes(CodCli, Nom, _ , _ ), bienes(CodCli, _ , Bien, _ ).
+	
+	b) info2(Nom) :- clientes(CodCli, Nom, _ , _ ), bienes(CodCli, CodBien, _ , _ ), partes(CodBien, _ , _ ).
+	
+	c) motos(CodBien) :- bienes( _ , CodBien , 'Moto' , A ), A > 2015.
+	
+	d) erroneos(Nom) :- clientes(CodCli, Nom, _ , _ ), bienes(CodCli, CodBien, _ , AnioAseg), partes(CodBien, _ , Anio), AnioAseg > Anio.
+	
+	e) antiguedad1(Nom, MediaAntiguedad) :- group by (
+												( clientes(CodCli, Nom, _ , _ ), bienes(CodCli, _ , _ , AnioAseg) ),
+												[CodCli],
+												(MediaAntiguedad = avg(AnioAseg))
+											).
+												
+	f) antiguedad2(Nom, SumaPartes) :- 	group by (
+											( clientes(CodCli, Nom, _ , _ ), bienes(CodCli, CodBien , _ , _ ), partes(CodBien, _ , valor ) ),
+											[CodCli],
+											(SumaPartes = sum(valor))
+										).
+											
+	
+Ejercicio 2) Arbol B+  (hecho en papel)
+	
+	
+	
+Ejercicio 3) MongoDB
+	a) 	use exoplanetas
+		exoplanetas.createCollection("especies")
+		exoplanetas.especies.insert({"codigo":111, "parecida":"hipopótamo", "tamaño":15,   "habitat":"Marino",	"esperanza": null})
+		exoplanetas.especies.insert({"codigo":222, "parecida":"abeja",	  	"tamaño":2,	   "habitat":null,		"esperanza": 2})
+		exoplanetas.especies.insert({"codigo":333, "parecida":"gato",		"tamaño":33,   "habitat":"Marino",	"esperanza": 1400})
+		exoplanetas.especies.insert({"codigo":444, "parecida":"caballo",	"tamaño":null, "habitat":null,		"esperanza": 328})
+	
+	b)	exoplanetas.especies.find({}, {"codigo":1,"parecida":1}).pretty() 
+	
+	c)	exoplanetas.especies.find({"or": [{"parecida": {"$in": ["hipopótamo", "caballo"]} }, {"habitat":"Marino"}, {"esperanza": {"$gte": 500}} ]})
+	
+	d)	exoplanetas.especies.update({"codigo":111}, {"$set":{ "adicionales": [{"rinoceronte": 0.8}, {"jirafa":0.9}] }} )
+	 
+	
+	

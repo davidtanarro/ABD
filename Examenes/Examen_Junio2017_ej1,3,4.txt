@@ -1,0 +1,73 @@
+1) MongoDB
+	a)
+	use movilmongo
+	db.createCollection("clientes")
+	db.clientes.insert({"dni":"111","nombre":"pepe", "telefono":1111,"direccion":"Madrid",	 "edad": null})
+	db.clientes.insert({"dni":"333","nombre":"juan", "telefono":3333,"direccion": null,		 "edad": null})
+	db.clientes.insert({"dni":"444","nombre":"maria","telefono":4444,"direccion": null,		 "edad": 28})
+
+	b)
+	db.clientes.find({}, {"dni":1,"nombre":1}).pretty()
+ 
+	c)
+	db.clientes.find({"or":[{"telefono":{"$in" : [1111, 4444] }}, {"nombre":"maria"}, {"edad" : {"$lte" : 30}}] })
+
+	d)
+	db.clientes.update({"nombre":"pepe"}, {"$set":{"adicionales": [{"casa": 1112}, {"trabajo":1113}] }} })
+	
+	e)
+	db.clientes.update({"nombre":"ana"}, {"$set":{"antiguedad":0}})
+	db.clientes.update({"nombre":"ana"}, {"$inc":{"antiguedad":1}})
+	
+	
+2) Hash
+	HECHO
+	
+	
+3) Datalog
+	% stock(producto, codigo-producto, cantidad, precio)
+	% pedidos(codigo-producto, dia, mes, año, cantidad-vendida)
+	
+	a) disponible(COD) :- stock( _ , COD, CAN, _ ), CAN > 0.
+	
+	b) pedidosfecha(COD, Dia, Mes, Anio) :- pedidos( COD, Dia, Mes, Anio, _ ).
+	
+	c) pedidosvalor(COD, Dia, Mes, Anio, VAL) :- pedidos( COD, Dia, Mes, Anio, V), V < VAL.
+	
+	d) numpedidos(M, A, NumPedidos) :-  group by (
+											pedidos( _ , _ , M, A, _ ),
+											[M, A],
+											(NumPedidos = count(*))
+										).
+	
+	e) cantidadvendida(A, SaldoTotal) :- group by (
+											pedidos( _ , _, _ , A, CAN),
+											[A],
+											(SaldoTotal = sum(CAN))
+										).
+	
+	
+4) XML
+	a)
+		for $x in doc("planetas.xml")/planetas/planeta
+		where $x/masa>1
+		return $x/nombre)
+		
+	
+	b)
+		for $x in doc("planetas.xml")/planetas/planeta
+		return 
+		<resultado>
+			<plan>  { data( $x/nombre ) }  </plan>
+			
+			{
+				for $y in $x/satelites
+				return  <nom>  { data( $y/nombre ) }  </nom>
+			}	
+		</resultado>
+	
+	
+	
+	
+	
+	

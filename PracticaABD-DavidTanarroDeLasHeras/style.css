@@ -1,0 +1,314 @@
+/* ----------------- CABECERA ---------------------*/
+
+header {
+	width: 100%;
+	height: 66px;
+
+	background: #a3c9ee;
+}
+
+.ancho_cabecera{
+	width: 80%;
+	height: 70px;
+	margin: auto;
+}
+
+
+.logo{
+	width: 30%;
+	height: 70px;
+	
+	float: left;
+}
+
+.logo p a{
+	color: #042749;
+	font-size: 30px;
+	color: darkblue;
+}
+
+.menu_cabecera{
+	width: 70%;
+	height: 70px;
+	float: left;
+	text-align: right;
+
+}
+
+.menu_cabecera a {
+	color: #2b43f4;
+}
+
+.menu_cabecera ul {
+	color: #042749;
+	font-size: 20px;
+}
+
+
+/*-------------------TOOLBAR-----------------------*/
+.menu_toolbar{
+	width: 100%;
+	height: 50px;
+	text-align: left;
+	
+	background: #232526;
+	
+}
+
+.menu_toolbar ul{
+	width: 100%;
+	height: 38px;
+	list-style: none;
+	padding-left: 15%;
+	padding-top: 12px;
+}
+
+.menu_toolbar li{
+	width: 200px;
+	height: 38px;
+	float: left;
+}
+
+.menu_toolbar ul li  .contenedor_enlaces_toolbar a{
+	color: white;
+	font-size: 17px;
+	text-decoration: none;
+}
+
+
+
+/*--------------------INDEX------------------------*/
+
+.contenedor_inicio {
+	width: 100%;
+	height: auto;
+	
+	float: left;
+	display: inline;
+	
+	margin-left: 25%;
+	margin-right: 25%;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+.contenedor_login {
+	width: 200px;
+	padding-right: 10%;
+	margin-right: 20%;
+	margin-left: 100px;
+}
+
+.contenedor_registro {
+	width: 200px;
+	padding-left: 10%;
+	margin-left: 200px;
+
+}
+
+.contenedor_error {
+	width: 100%;
+	height: 20px;
+	text-align: center;
+
+	color: #f50913;
+}
+
+
+
+.form1{
+	float: left;
+
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+
+	border-radius: 15px;
+	border: 1px solid lightblue;
+
+	background-color: transparent;
+}
+
+.input_100x15{
+	display: block;
+	padding: 5px;
+	margin: 10px 0;
+	font-size: 12px;
+	width: 90%;
+}
+
+.input_100x15[type=submit] {
+	display: block;
+	padding: 5px;
+	margin: 10px 0;
+	font-size: 12px;
+	width: 100%;
+
+	border:0;
+	color: black;
+	opacity: 0.8;
+	background-color: lightblue;
+	cursor: pointer;
+	border-radius: 20px;
+}
+
+
+.input_titulo{
+	display: block;
+	padding: 5px;
+	margin: 10px 0;
+	font-size: 12px;
+	width: 100%;
+}
+
+.input_cuerpo{
+	display: block;
+	padding: 5px;
+	margin: 10px 0;
+	font-size: 12px;
+	width: 100%;
+
+	height: auto;
+	min-height: 40px;
+}
+.input_enviar {
+	display: block;
+	padding: 7px;
+	margin: 10px 0;
+	font-size: 12px;
+	width: 20%;
+	
+	border:0;
+	color: black;
+	opacity: 0.8;
+	background-color: #26ff44;
+	cursor: pointer;
+	border-radius: 20px;
+}
+
+
+/*---------------------FORO------------------------*/
+
+.contenedor_tablon {
+	display: block;
+	padding-top: 40px;
+	padding-right: 100px;
+	padding-left: 100px;
+	padding-bottom: 40px;
+
+	background-color: #c6ccf7;
+}
+
+.contenedor_enviarMensaje {
+	padding: 15px;
+}
+
+.enviarMensaje {
+	background-color: #b5ffbb;
+	border: 2px solid darkblue;
+	border-radius: 20px;
+
+	
+	padding-right: 50px;
+	padding-left: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.enviarMensaje p {
+	text-align: center;
+	color: #03094b;
+
+	font-size: 17px;
+}
+
+.contenedor_mensaje {
+	padding-bottom: 15px;
+}
+
+.mensaje {
+	padding: 10px;
+	border-radius: 20px;
+
+	background-color: #69ff74;
+	border: 2px solid darkblue;
+}
+
+.mensaje_titulo {
+	width: 85%;
+	height: auto;
+	padding-left: 60px;
+
+}
+
+.mensaje_cuerpo {
+	width: 85%;
+	height: auto;
+	padding-left: 60px;
+}
+
+
+/*---------------------BANDEJA------------------------*/
+
+.titulo {
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	font-size: 20px;
+	color: #000163;
+	text-align: center;
+}
+.titulo hr {
+	color: #000163;
+}
+
+.notificacion {
+	font-size: 16px;
+	color: #cd0404;
+	text-align: center;
+}
+
+
+/*--------------------TABLA --------------------*/
+
+.contenedor_tabla {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    min-height: 100px;
+    margin: 1%;
+    margin-left: 45px;
+    margin-top: 50px;
+    width: 92.4%;
+}
+
+.contenedor_tabla table {
+	border-collapse : collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.contenedor_tabla caption {
+	text-align: left;
+	font-size: 22px;
+	padding: 10px;
+}
+
+.contenedor_tabla td, .contenedor_tabla th {
+    border: 1px solid #060606;
+    padding: 3px;
+    width: 0.1%;
+    text-align: center;
+}
+
+.contenedor_tabla th {
+    padding-top: 9px;
+    padding-bottom: 12px;
+
+    background-color: #2f2f2f;
+    color: #30f9cb;
+}
+
+.contenedor_tabla td {
+	height: 30px;
+}
