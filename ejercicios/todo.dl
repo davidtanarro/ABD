@@ -1,0 +1,58 @@
+%libros :
+%libros( Titulo , Ibsn , Autor ,Tema,Anyo , Editorial , Precio , Unidades ) .
+libros(narnia, 1111, asaber, fantasia, 2001, yuju, 50, 50 ).
+libros(lohomora, 2222, quisio,adacadabra, 2017 , yuju, 20, 30 ).
+libros(pipasPalPajaro, 3333, periquito, fantasia, 2011, yuju, 18, 2 ).
+libros(bocadillodeatun, 4444, mortadela, novela, 2008, yuju, 7, 10 ).
+
+%clientes:
+%clientes(Nombre , Nif ,Num_pedido ) .
+clientes(manolo , 12345698 ,1 ) .
+clientes(pepe , 986547123 ,4 ) .
+clientes(manolo , 12345698 ,2 ) .
+
+
+
+%pedidos :
+%pedidos (Num_pedido , Dia ,Mes ,Anyo , Ibsn , Unidades ) .
+pedidos(1 , 25 ,4 ,2016 , 1111 , 2 ).
+pedidos(2 , 12 ,6 ,2016 , 1111 , 1 ).
+pedidos(3 , 18 ,10 ,2015 ,3333 , 1 ).
+pedidos(4 , 2 ,1 ,2017 , 4444 , 2 ).
+
+
+
+%Libros de un autor dado.
+autor(A,T):- libros(T,_,A,_,_,_,_,_).
+
+%Libros "caros" (precio mayor de 40 euros).
+libros_caros(T,P):- libros(T,_,_,_,_,_,P,_), P>40.
+%Libros casi agotados (menos de 10 unidades).
+libros_agotados(T,U):-libros(T,_,_,_,_,_,_,U), U<10.
+
+%Libros antiguos (anteriores a 1980).
+libros_antiguos(T,F):- (T,_,_,_,F,_,_,_),F<1980.
+
+%Libros comprados por cada cliente (especifica solo el titulo).
+libro_compra(Id,T):- (pedidos(Id,_,_,_,Isbn,_), libros(T,Isbn,_,_,_,_,_,_),clientes(N,_,Id).
+%Libros comprados por cliente por a~no.
+
+
+%Libros comprados por cliente por titulo.
+
+%Ingresos por venta por a~no. ->NO ME SALEEE
+
+%Ingresos por venta por libro.
+%ingresos_libros(T,P,Cuenta):- group_by(libros(T, Isbn, _, _, _, _, P, _),pedidos(Id,_,_,_,Isbn,U),[Id,Isbn], Cuenta=(sum(U)*P)).
+
+%ingresos_libros(T,P,V):-group_by(libros(T,Isbn,_,_,_,_,P,), pedidos(_, _, _, _,Isbn,U),[T,P],V=(sum(U)*P)).
+
+%Ingresos por venta por libro y a~no.
+
+%Todos los pedidos y su fecha.
+
+%Ingresos por tema y a~no.
+
+%Ingresos por editorial y a~no.
+
+%Ingresos por titulo.

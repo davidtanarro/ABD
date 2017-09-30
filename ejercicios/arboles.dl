@@ -1,0 +1,50 @@
+hombre( abraham ) .
+hombre( clancy ) .
+hombre( herbert ) .
+hombre( homer ) .
+hombre( bart ) .
+mujer(mona) .
+mujer( jackie ) .
+mujer(marge) .
+mujer( patty ) .
+mujer( selma ) .
+mujer( lisa ) .
+mujer(maggie ) .
+mujer( ling ) .
+
+progenitor( abraham , herbert ) .
+progenitor( abraham , homer ) .
+progenitor(mona , homer ) .
+progenitor(clancy , marge ) .
+progenitor(jackie , marge ) .
+progenitor(clancy , patty ) .
+progenitor( jackie , patty ) .
+progenitor( clancy , selma ) .
+progenitor( jackie , selma ) .
+progenitor( homer , bart ) .
+progenitor(marge , bart) .
+progenitor( homer , lisa) .
+progenitor(marge , lisa) .
+progenitor( homer , maggie ) .
+progenitor(marge , maggie ) .
+progenitor( selma , ling) .
+
+%padre ->datalog
+padre(X,Y):-progenitor(X,Y), hombre(X).
+
+%madre ->datalog
+madre(X,Y):-progenitor(X,Y), mujer(X).
+%hermanos ->datalog
+hermanos(Y,Z):-progenitor(X,Y), progenitor(X,Z), X\=Y.
+
+%regla recursiva
+antecesor(X,Y):-progenitor(X,Y).
+antecesor(X,Y):-progenitor(X,Z), antecesor(Z,Y).
+%antecesor(Z,Y):-progenitor(X,Z), antecesor(Z,Y).
+%antecesor2(X,Y):-progenitor(X,Z), progenitor(Z,Y).
+
+%misma generacion ->recursiva
+mg(X,Y):-hermanos(X,Y).
+
+
+

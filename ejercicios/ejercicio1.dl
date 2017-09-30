@@ -1,0 +1,31 @@
+%Relaciones entre personas :
+padre (lucas,andres).
+hijo (lucas,pepe).
+hijo (lucas,juan).
+hijo (lucas,maria).
+hijo (lucas,ana).
+hijo (juan,blas).
+hijo (juan,rosa).
+%Atributos de personas :
+edad ( lucas,44).
+edad (andres,67).
+edad (pepe,22).
+edad (maria,19).
+edad (ana,15).
+mujer(maria).
+mujer(ana).
+hombre(pepe).
+
+%X es mayor de 17 años :
+mayor(X) :- edad(X,E),E>17.
+%Y es padre de X :
+padre(X,Y):-hijo(X,Y).
+%X e Y son hermanos :
+hermanos(X,Y):-hijo(P,X),hijo(P,Y).
+%Y es hermana de X :
+hermana(X,Y):-hijo(P,X),hijo(P,Y),mujer(Y), X\=Y.
+%Y es hermano varon de X :
+hermano(X,Y):-hijo(P,X),hijo(P,Y),hombre(Y), X\=Y.
+%Y es tio de X
+tio(X,Y):-padre(X, Z) , hermano(Z ,Y) .
+

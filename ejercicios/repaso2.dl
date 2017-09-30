@@ -1,0 +1,74 @@
+%Relaciones entre personas :
+padre(lucas,andres).
+hijo(lucas,pepe).
+hijo(lucas,juan).
+hijo(lucas,maria).
+hijo(lucas,ana).
+hijo(juan,blas).
+hijo(juan,rosa).
+
+%Atributos de personas :
+edad( lucas,44).
+edad(andres,67).
+edad(pepe,22).
+edad(maria,19).
+edad(ana,15).
+mujer(maria).
+mujer(ana).
+hombre(pepe).
+
+%Clientes : 
+%ciente ( id cliente ,nombre , telefono ): 
+cliente(1 ,pepe ,444). 
+cliente(1 ,pepe ,222). 
+cliente(2 , juan ,111). 
+cliente(2 , juan ,333). 
+%Telefonos : 
+%telefono ( telefono ,mes, gasto ): 
+telefono(444 ,1 ,420). 
+telefono(444 ,2 ,430). 
+telefono(444 ,3 ,425). 
+telefono(222 ,1 ,222). 
+telefono(222 ,2 ,210). 
+telefono(222 ,2 ,215). 
+telefono(222 ,3 ,215). 
+telefono(111 ,1 ,160). 
+telefono(333 ,2 ,310). 
+telefono(333 ,3 ,315).
+
+
+%X es mayor de 17 años :
+mayor(N):-edad(N,E), E>17.
+%Y es padre de X :
+padre(P,H):-hijo(P,H).
+%X e Y son hermanos :
+hermanos(H1,H2):- hijo(P,H1),hijo(P,H2), H1\=H2.
+
+%Y es hermana de X :
+hermana(H1,H2):-hijo(P,H1), mujer(H1), hijo(P,H2), H1\=H2.
+%Y es hermano varon de X :
+hermano(H1,H2):-hijo(P,H1), hombre(H1), hijo(P,H2), H1\=H2.
+%Y es tio de X
+tio(T,S):-hermano(T,P),hijo(P,S).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%consumos
+consumos(N,M,G):-cliente(_,N,T),telefono(T,M,G).
+%consumo por telefono
+comsumo_telf(T,C) :- group_by(telefono(T,_,G),[T], C=sum(G)).
+
+%cosumos por mes
+comsumo_mes(M,C) :- group_by(telefono(_,M,G),[M], C=sum(G)).
+
+%cosumos por telefono y mes
+comsumo_mesTelf(T,M,C) :- group_by(telefono(T,M,G),[T,M], C=sum(G)).
+
+%cosumos por cliente
+comsumo_cliente(N,C) :- group_by(cliente(_,N,T),telefono(T,M,G),[N], C=sum(G)).
+
+%cosumos por cliente y mes
+comsumo_cliente_mes(N,M,C) :- group_by(cliente(_,N,T),telefono(T,M,G),[N,M], C=sum(G)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

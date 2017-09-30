@@ -1,0 +1,80 @@
+
+
+%libros :
+%libros( Titulo , Ibsn , Autor ,Tema,Anyo , Editorial , Precio , Unidades ) .
+libros(narnia, 1111, asaber, fantasia, 2001, yuju, 50, 50 ).
+libros(lohomora, 2222, quisio,adacadabra, 2017 , yuju, 20, 30 ).
+libros(pipasPalPajaro, 3333, periquito, fantasia, 2011, yuju, 18, 2 ).
+libros(bocadillodeatun, 4444, mortadela, novela, 2008, yuju, 7, 10 ).
+
+%clientes:
+%clientes(Nombre , Nif ,Num_pedido ) .
+clientes(manolo , 12345698 ,1 ).
+clientes(pepe , 986547123 ,4 ).
+clientes(manolo , 12345698 ,2 ).
+
+
+
+%pedidos :
+%pedidos (Num_pedido , Dia ,Mes ,Anyo , Ibsn , Unidades ) .
+pedidos(1 , 25 ,4 ,2016 , 1111 , 2 ).
+pedidos(2 , 12 ,6 ,2016 , 1111 , 1 ).
+pedidos(3 , 18 ,10 ,2015 ,3333 , 1 ).
+pedidos(4 , 2 ,1 ,2017 , 4444 , 2 ).
+
+
+%Libros de un autor dado.
+autor(T,A):-libros(T,_,A,_,_,_,_,_).
+%Libros "caros" (precio mayor de 40 euros).
+libros_caros(T,P):- (T,_,_,_,_,_,P,_), P > 40.
+
+%Libros casi agotados (menos de 10 unidades).
+ libros_agotados(T,U) :- libros(T,_,_,_,_,_,_,U), U < 10.
+ 
+%Libros antiguos (anteriores a 1980).
+libros_antig(T,F):- libros(T,_,_,_,F,_,_,_), F < 1980.
+
+%Libros comprados por cada cliente (especifica solo el titulo).
+libros_cliente(T):- libros(T,Isbn,_,_,_,_,_,_), pedidos(Id ,_,_,_, Isbn ,_ ),clientes( _, _ ,Id )
+
+%Libros comprados por cliente por a~no.
+libros_cliente_anio(C,A,Cu):- group_by(libros(T,Isbn,_,_,_,_,_,_), pedidos(Id ,_,_,A, Isbn ,_ ),clientes( C, _ ,Id ),[C,A], Cu=count(T)).
+
+%Libros comprados por cliente por titulo.
+libros_cliente_titulo(C,A,Cu):- group_by(libros(T,Isbn,_,_,_,_,_,_), pedidos(Id ,_,_,A, Isbn ,_ ),clientes( C, _ ,Id ),[C,A], Cu=count(T)).
+
+%Ingresos por venta por a~no.
+%%%%%%Pedidos comprados por año, precio y unidades 
+pedidos_comprados(Id,T,A,P,U,Cu):- libros(T,Isbn,_,_,_,_,P,_), pedidos(Id ,_,_,A, Isbn ,U ),clientes( _, _ ,Id ), Cu is P*U 
+
+ingresos_vent_anio(Id,A,Total):- group_by(pedidos_comprados(Id,T,A,P,U,Cu),[Id,A], Total=sum(Cu)).
+
+%Ingresos por venta por libro.
+ingresos_venta_libro(Id,T,Total):-group_by(pedidos_comprados(Id,T,_,_,_,Cu),[Id,T], Total=sum(Cu)).
+
+
+%Ingresos por venta por libro y a~no.
+ingresos_venta_libro_anio(Id,T,A,Total):-group_by(pedidos_comprados(Id,T,A,_,_,Cu),[Id,T,A], Total=sum(Cu)).
+
+%Todos los pedidos y su fecha.
+pedidos_fecha(Id,D,M,A):- pedidos(Id ,D,M,A,_,_ ).
+
+%Ingresos por tema y a~no.
+%%%%%%Pedidos comprados por año, precio, unidades y tema 
+pedidos_comprados_tema(Id,T,Te,A,P,U,Cu):- libros(T,Isbn,_,Te,_,_,P,_), pedidos(Id ,_,_,A, Isbn ,U ),clientes( _, _ ,Id ), Cu is P*U 
+
+ingresos_tema_anio(Te,A,Total):- group_by(pedidos_comprados_tema(_,_,Te,A,_,_,Cu),[Te,A], Total=sum(Cu)).
+
+%Ingresos por editorial y a~no.
+%%%%%%Pedidos comprados por año, precio, unidades, tema y editorial
+pedidos_comprados_editorial(Id,T,Te,E,A,P,U,Cu):- libros(T,Isbn,_,Te,_,E,P,_), pedidos(Id ,_,_,A, Isbn ,U ),clientes( _, _ ,Id ), Cu is P*U 
+
+ingresos_editorial_anio(E,A,Total):- group_by(pedidos_comprados_editorial(_,_,_,E,A,_,_,Cu),[E,A], Total=sum(Cu)).
+
+
+%Ingresos por titulo.
+ingresos_titulo(T,Total):- group_by(pedidos_comprados_editorial(_,T,_,_,_,_,_,Cu),[T], Total=sum(Cu)).
+
+
+
+
